@@ -1,10 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
 import ToDo from './components/ToDo/ToDo';
+import Counter from './components/Counter/Counter';
 
 function App() {
   return (
-    <ToDo/>
+    <div>
+      <ToDo />
+      <Counter />
+    </div>
   );
 }
 

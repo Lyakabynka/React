@@ -1,4 +1,4 @@
-const films = [
+const filmsSource = [
     {
         id: 1,
         name: 'Harry Potter',
@@ -42,4 +42,4 @@ const films = [
 ];
 
 
-export default films;
+export default filmsSource;

@@ -1,12 +1,12 @@
 import React from 'react'
-import films from './Films';
+import filmsSource from './Films';
 
 export default function FilmSearch({ setFilms }) {
 
     const filter = (e) => {
-        const filteredFilms = films.filter(film =>
+        const filteredFilms = filmsSource.filter(film =>
             film.name.toLowerCase().includes(e.target.value.toLowerCase()));
-
+        
         setFilms(filteredFilms);
     }
 
