@@ -4,3 +4,7 @@
 .completed{
     background-color: green;
 }
+
+.activeBtn{
+    background-color: green;
+}

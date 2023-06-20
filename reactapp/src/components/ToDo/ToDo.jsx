@@ -1,66 +1,75 @@
-import React from "react";
-import AddToDo from "./AddToDo";
-import FilterToDo from "./FilterToDo";
-import ToDoItem from "./ToDoItem";
-import { toDoItems } from "./toDoItems";
+import React, { useReducer, useState } from 'react';
+import AddToDo from './AddToDo';
+import FilterToDo from './FilterToDo';
+import ToDoItem from './ToDoItem';
+import { toDoItems } from './toDoItems';
 import './style.css';
-import { useState } from "react";
-import { v4 as uuidv4 } from "uuid"
+import tasksReducer from './ToDoReducer';
 
-export default function ToDo() {
+const ToDo = () => {
+    const [taskList, dispatch] = useReducer(tasksReducer, toDoItems);
+    const [filter, setFilter] = useState('All');
 
-    const [taskList, setTaskList] = useState(toDoItems);
-
-    const addTask = (name) => {
-        let newTask = {
-            id: uuidv4(),
-            name: name,
-            completed: false,
-        };
-
-        setTaskList([...taskList, newTask]);
-        // new arr with the content of existing one
+    const addTask = (name) =>{
+        dispatch({
+            type: 'add',
+            name: name
+        });
     }
-
-    const toggleTaskCompleted = (id) => {
-        const updatedTasks = taskList.map(task => {
-            if(task.id === id)
-            {
-                return {...task, completed: !task.completed};
-            }
-            return task;
-        })
-        setTaskList(updatedTasks);
-    }
-
-    const tasksWord = taskList.length === 1 ? 'task' : 'tasks';
-    const taskHeading = `${taskList.length} ${tasksWord}`
-
 
     const deleteTask = (id) => {
-
-        setTaskList(taskList.filter(t=>t.id !== id));
+        dispatch({
+            type: 'delete',
+            id: id,
+        })
     }
 
+    const editTask = (id, name) => {
+        dispatch({
+            type: 'edit',
+            id: id,
+            name: name
+        })
+    }
+
+    const filter_map = {
+        All: ()  => true,
+        Active: (task) => !task.completed,
+        Completed: (task) => task.completed
+    };  
+
+    const toggleTaskCompleted = (id) => {
+        dispatch({
+            type: 'complete',
+            id: id,
+        })
+
+        //setTaskList(updatedTasks);
+    }
+
+    const taskWord = taskList.length === 1 ? 'task' : 'tasks';
+    const taskHeading = `${taskList.length} ${taskWord}`;
+
     return (
-        <>
-            <h2 className="heading">Todo List</h2>
+        <div>
+            <h2 className='heading'>ToDo</h2>
 
-            <AddToDo addTask={addTask} />
-
-            <FilterToDo />
+            <AddToDo addTask={addTask}/>
+            <FilterToDo filter_map={filter_map} filter={filter} setFilter={setFilter}/>
 
             <div>
-                <h3> {taskHeading}</h3>
+                <h3>{taskHeading}</h3>
                 <ul>
-                    {taskList.map(task =>
-                        <ToDoItem
-                            task = {task}
-                            key={task.id} 
-                            toggleTaskCompleted = {toggleTaskCompleted}
-                            deleteTask = {deleteTask}/>)}
+                    {taskList.filter(filter_map[filter]).map(task => <ToDoItem task={task} 
+                    toggleTaskCompleted = {toggleTaskCompleted} 
+                    deleteTask = {deleteTask} 
+                    editTask = {editTask}
+                    key={task.id} />)}
                 </ul>
             </div>
-        </>
+        </div>
+
     );
 }
+
+export default ToDo;
