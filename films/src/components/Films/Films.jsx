@@ -9,8 +9,8 @@ export default function Films() {
     
     const [films, setFilms] = useState([]);
 
-    const [sortBy, setSortBy] = useState(()=>{});
-
+    const [sortBy, setSortBy] = useState(() => {});
+    
     return (
         <>
             <FilmSearch setFilms={setFilms}/>
@@ -18,7 +18,6 @@ export default function Films() {
             <div>
                 {films?.sort(sortBy).map(film => <Film key={film.imdbID} film={film}/>)}
             </div>
-
         </>
     )
 }
