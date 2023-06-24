@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Styles/Film.css'
 import { filmService } from '../../services/filmService';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 const options = [
     {
@@ -22,29 +22,29 @@ export default function FilmSearch({ setFilms }) {
 
 
     const [search, setSearch] = useSearchParams();
+    const [title,setTitle] = useState(search.get('title' ?? ''));
+    const [type,setType] = useState(search.get('type') ?? options[0].value);
 
     const displayUsers = async () => {
         const data =
-            await filmService.getFilms(search.get('title') ?? '', search.get('type') ?? 'movie');
+            await filmService.getFilms(title, type);
 
         setFilms(data);
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        displayUsers();
+        setSearch({title: title, type: type});
+        await displayUsers();
     }
 
     return (
         <form className='search-bar' onSubmit={handleSubmit}>
+            <input type="text" onInput={(e) => {setTitle(e.target.value)}} 
+                defaultValue={search.get('title')} />
 
-            <input type="text" onInput={(e) => {
-                    setSearch({ title: e.target.value, type: search.get('type') ?? 'movie' })}} 
-                value={search.get('title')} />
-
-            <select onInput={(e) => {
-                    setSearch({ title: search.get('title') ?? '', type: e.target.value })}} 
-                value={search.get('type')}>
+            <select onInput={(e) => {setType(e.target.value)}} 
+                defaultValue={search.get('type')}>
 
                 {options.map(option =>
                     <option key={option.value} value={option.value}>{option.label}</option>

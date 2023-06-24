@@ -1,5 +1,5 @@
 header {
-    background-color: #333;
+    background-color: #999;
     padding: 20px 0;
     text-align: center;
 }
@@ -13,4 +13,22 @@ header a {
 
 header a.active {
     color: #f90;
+}
+
+header .theme{
+    float:right;
+    width: 200px;
+    margin-right: 20px;
+}
+
+.dark{
+    background-color: #5c5c5c;
+}  
+
+.light{
+    background-color: lightgrey;
+}
+
+.blue{
+    background-color: lightblue;
 }

@@ -18,6 +18,7 @@ export default function Films() {
             <div>
                 {films?.sort(sortBy).map(film => <Film key={film.imdbID} film={film}/>)}
             </div>
+            
         </>
     )
 }

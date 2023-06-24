@@ -4,14 +4,20 @@
     padding: 10px;
 }
 
-.search-bar{
-    display: inline-block;
-    background-color: grey;
-    padding: 10px;
-}
-
 .filterBar{
     padding: 10px;
     float: right;
     background-color: grey;
+}
+
+.film .dark{
+    background-color: rgb(125, 125, 125);
+}
+
+.film .light{
+    background-color: #ffe9ce;
+}
+
+.film .blue{
+    background-color: #9ab0ff;
 }
