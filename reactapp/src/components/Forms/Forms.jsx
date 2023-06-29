@@ -35,7 +35,13 @@ export default function Forms() {
                         { pattern: /^[a-z ]+$/, message: 'Number is not supported' }]}>
                     <Input />
                 </Form.Item>
-                <Form.Item name="name" label="Product Name: ">
+                <Form.Item name="name" label="Product Name: "
+                    rules={[
+                        { required: true, message: "Name is required" },
+                        { min: 3 },
+                        { max: 50 },
+                        { pattern: /^[a-z ]+$/, message: 'Number error' }
+                    ]}>
                     <Input />
                 </Form.Item>
                 <Form.Item name="name" label="Product Name: ">

@@ -9,6 +9,7 @@ import UserInfo from './components/Users/UserInfo';
 import UsersContext from './contexts/UserContext';
 import ThemeProvider from './providers/ThemeProvider.';
 import { useEffect, useState } from 'react';
+import Counters from './components/Counters/Counters';
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -33,6 +34,8 @@ function App() {
             <Route path='/users' element={<Users />}>
               <Route path=':id' element={<UserInfo />} />
             </Route>
+
+            <Route path="/counters" element={<Counters />} />
 
             <Route path="*" element={<h1>404 Not Found</h1>} />
           </Routes>

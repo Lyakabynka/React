@@ -11,7 +11,7 @@ export default function UserInfo() {
     const [user, setUser] = useState({});
 
     const getUser = async () => {
-        setUser(users.find(user=>user.id === id));
+        setUser(users.find(user=>user.id.toString() === id));
     }
 
     useEffect(()=>{

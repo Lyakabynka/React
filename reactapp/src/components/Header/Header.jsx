@@ -14,6 +14,8 @@ export default function Header() {
       <NavLink to='/'>Home</NavLink>
       <NavLink to='/counter'>Counter</NavLink>
       <NavLink to='/users'>Users</NavLink>
+      <NavLink to="/counters">Counters</NavLink>
+
 
       { theme === 'dark' ? <LightModeIcon onClick={changeTheme} /> : <DarkModeIcon  onClick={changeTheme}/> }
     </header>
