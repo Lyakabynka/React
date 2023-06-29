@@ -10,7 +10,7 @@ const ToDo = () => {
     const [taskList, dispatch] = useReducer(tasksReducer, toDoItems);
     const [filter, setFilter] = useState('All');
 
-    const addTask = (name) =>{
+    const addTask = (name) => {
         dispatch({
             type: 'add',
             name: name
@@ -33,10 +33,10 @@ const ToDo = () => {
     }
 
     const filter_map = {
-        All: ()  => true,
+        All: () => true,
         Active: (task) => !task.completed,
         Completed: (task) => task.completed
-    };  
+    };
 
     const toggleTaskCompleted = (id) => {
         dispatch({
@@ -54,17 +54,21 @@ const ToDo = () => {
         <div>
             <h2 className='heading'>ToDo</h2>
 
-            <AddToDo addTask={addTask}/>
-            <FilterToDo filter_map={filter_map} filter={filter} setFilter={setFilter}/>
+            <AddToDo addTask={addTask} />
+            {/* <EditToDo  /> */}
+            <FilterToDo
+                filter_map={filter_map}
+                filter={filter}
+                setFilter={setFilter} />
 
             <div>
                 <h3>{taskHeading}</h3>
                 <ul>
-                    {taskList.filter(filter_map[filter]).map(task => <ToDoItem task={task} 
-                    toggleTaskCompleted = {toggleTaskCompleted} 
-                    deleteTask = {deleteTask} 
-                    editTask = {editTask}
-                    key={task.id} />)}
+                    {taskList.filter(filter_map[filter]).map(task => <ToDoItem task={task}
+                        toggleTaskCompleted={toggleTaskCompleted}
+                        deleteTask={deleteTask}
+                        editTask={editTask}
+                        key={task.id} />)}
                 </ul>
             </div>
         </div>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
+import EditTodo from './EditTodo';
 
 const ToDoItem = ({ task, toggleTaskCompleted, deleteTask, editTask }) => {
     const [isediting, setEditing] = useState(false);
@@ -36,7 +37,8 @@ const ToDoItem = ({ task, toggleTaskCompleted, deleteTask, editTask }) => {
 
     return (
         <li>
-            {isediting ? editingTemplate : viewTemplate}
+            {isediting ? <EditTodo task={task} editTask={editTask} setEditing={setEditing}/> : ''}
+            {viewTemplate}
         </li>
     );
 }

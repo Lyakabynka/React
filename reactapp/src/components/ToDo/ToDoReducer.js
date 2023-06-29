@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
 const tasksReducer = (taskList, action) => {
-    switch(action.type){
+    switch (action.type) {
         case 'add':
             let newTask = {
                 id: uuidv4(),
@@ -10,19 +10,20 @@ const tasksReducer = (taskList, action) => {
             };
             return [...taskList, newTask];
         case 'delete':
-            return taskList.filter(task=>task.id !== action.id);
+            return taskList.filter(task => task.id !== action.id);
         case 'edit':
             return taskList.map((task) => {
-                if(task.id === action.id) return {...task, name: action.name}
-                return task;});
+                if (task.id === action.id) return { ...task, name: action.name }
+                return task;
+            });
         case 'complete':
             return taskList.map(task => {
-                if(task.id === action.id){
-                    return {...task, completed: !task.completed}
+                if (task.id === action.id) {
+                    return { ...task, completed: !task.completed }
                 }
                 return task;
             });
-        default:break;
+        default: break;
     }
 }
 

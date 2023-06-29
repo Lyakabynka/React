@@ -1,5 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
+import Forma from '../Forms/Forma';
+import Forms from '../Forms/Forms';
 
 export default function Counter() {
     
@@ -18,6 +20,9 @@ export default function Counter() {
             <button onClick={() => { decrement() }}>-</button>
             <span>{count}</span>
             <button onClick={() => { increment() }}>+</button>
+
+            <Forma/>
+            <Forms/>
         </div>
     )
 }
